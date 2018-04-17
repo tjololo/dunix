@@ -10,8 +10,11 @@ const VERSION = "2018.1"
 
 const URI = "https://download.jetbrains.com/idea/ideaIU-"
 
-func GetDownloadURI() string {
-	return URI + VERSION + FILE_EXTENSION
+func GetDownloadURI(version string) string {
+	if version == "" {
+		return URI + VERSION + FILE_EXTENSION
+	}
+	return URI + version + FILE_EXTENSION
 }
 
 func DownloadFile(filepath string, url string) error {
