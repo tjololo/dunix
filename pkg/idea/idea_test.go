@@ -4,7 +4,9 @@ package idea
 import (
 	"testing"
 	"os"
-	"log"
+	"net/http/httptest"
+	"net/http"
+	"io/ioutil"
 )
 
 func TestGetDownloadURI_version_defined(t *testing.T) {
@@ -24,17 +26,28 @@ func TestGetDownloadURI_version_not_defined(t *testing.T) {
 }
 
 func TestDownloadFile(t *testing.T) {
-	downloadPath := "./idea.tar.gz"
-	//TODO: httptest to get a test not dependent on external dependencies
-	DownloadFile(downloadPath, "https://download.jetbrains.com/idea/ideaIU-2018.1.1.tar.gz")
+	downloadPath := "./test-file.txt"
 	defer deleteFile(downloadPath)
+	expectedFilecontent := "Just a test string"
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte(expectedFilecontent))
+	}))
+	defer ts.Close()
+	DownloadFile(downloadPath, ts.URL)
 	var _, e = os.Stat(downloadPath)
 	if os.IsNotExist(e) {
 		t.Error("File was not downloaded")
 	}
+	downloadedData, _ := ioutil.ReadFile(downloadPath)
+	contentString := string(downloadedData[:])
+	if contentString != expectedFilecontent {
+		t.Errorf(
+			"Unexpected content of downloaded file\nExpected: %s\nActual: %s",
+			expectedFilecontent,
+			contentString)
+	}
 }
 
 func deleteFile(file string) {
-	log.Printf("Deleting file %s", file)
 	os.Remove(file)
 }
