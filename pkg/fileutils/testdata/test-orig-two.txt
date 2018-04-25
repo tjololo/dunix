@@ -1,0 +1,1 @@
+I'm another test file. I will replace a existing symlink
