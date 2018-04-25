@@ -1,4 +1,4 @@
-package unarchive
+package fileutils
 
 import (
 	"io"
@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"os"
 )
+const UNTAR_PERMISSION = 0755
 
 func Untar(destination string, archive io.Reader) error {
 	gzr, err := gzip.NewReader(archive)
@@ -35,7 +36,7 @@ func Untar(destination string, archive io.Reader) error {
 		switch header.Typeflag {
 		case tar.TypeDir:
 			if _, err := os.Stat(target); err != nil {
-				if err := os.Mkdir(target, 0755); err != nil {
+				if err := os.Mkdir(target, UNTAR_PERMISSION); err != nil {
 					return err
 				}
 			}
