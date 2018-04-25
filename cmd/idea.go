@@ -20,13 +20,17 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var installPath string
+var createSymlink bool
+var symlinkName string
+var version string
 // ideaCmd represents the idea command
 var ideaCmd = &cobra.Command{
 	Use:   "idea",
 	Short: "Install idea",
 	Long: `Download Intellij Idea Ultimate from jetbrains.com`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("idea called")
+		fmt.Printf("idea called, install path: %s\n", installPath)
 	},
 }
 
@@ -41,8 +45,8 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	ideaCmd.Flags().StringP("install-path", "p", "/opt", "What dir to install Intellij Idea in.")
-	ideaCmd.Flags().BoolP("create-symlink", "s", true, "Create symlink in install folder.")
-	ideaCmd.Flags().StringP("symlink-name", "n", "idea", "Name of the symlink created with -s.")
-	ideaCmd.Flags().StringP("version", "v", "2018.1.2", "What version of Intellij Idea to install.")
+	ideaCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Intellij Idea in.")
+	ideaCmd.Flags().BoolVarP(&createSymlink,"create-symlink", "s", true, "Create symlink in install folder.")
+	ideaCmd.Flags().StringVar(&symlinkName,"symlink-name", "idea", "Name of the symlink created with -s.")
+	ideaCmd.Flags().StringVarP(&version, "version", "v", "2018.1.2", "What version of Intellij Idea to install.")
 }
