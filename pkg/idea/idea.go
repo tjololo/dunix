@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-const VERSION = "2018.1"
+const VERSION = "2018.1.2"
 
 const URI = "https://download.jetbrains.com/idea/ideaIU-"
 
@@ -41,3 +41,4 @@ func DownloadFile(filepath string, url string) error {
 
 	return nil
 }
+
