@@ -15,9 +15,12 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
+	"fmt"
+	"github.com/tjololo/go-learning/pkg/fileutils"
+	"path/filepath"
+	"os"
+	"github.com/tjololo/go-learning/pkg/idea"
 )
 
 var installPath string
@@ -28,25 +31,36 @@ var version string
 var ideaCmd = &cobra.Command{
 	Use:   "idea",
 	Short: "Install idea",
-	Long: `Download Intellij Idea Ultimate from jetbrains.com`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("idea called, install path: %s\n", installPath)
-	},
+	Long:  `Download Intellij Idea Ultimate from jetbrains.com`,
+	Run:   installIdea,
 }
 
 func init() {
 	installCmd.AddCommand(ideaCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// ideaCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
 	ideaCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Intellij Idea in.")
-	ideaCmd.Flags().BoolVarP(&createSymlink,"create-symlink", "s", true, "Create symlink in install folder.")
-	ideaCmd.Flags().StringVar(&symlinkName,"symlink-name", "idea", "Name of the symlink created with -s.")
+	ideaCmd.Flags().BoolVarP(&createSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
+	ideaCmd.Flags().StringVar(&symlinkName, "symlink-name", "idea", "Name of the symlink created with -s.")
 	ideaCmd.Flags().StringVarP(&version, "version", "v", "2018.1.2", "What version of Intellij Idea to install.")
+}
+
+func installIdea(cmd *cobra.Command, args []string) {
+	downloadUrl := idea.GetDownloadURI(version)
+	downloadIdeaTarTo := "/tmp/idea.tar.gz"
+	defer os.Remove(downloadIdeaTarTo)
+	if err := idea.DownloadFile(downloadIdeaTarTo, downloadUrl); err != nil {
+		fmt.Printf("failed to download idea from URL: %s to folder %s\n%v", downloadUrl, installPath, err)
+		return
+	}
+	fmt.Printf("Extracting to: %s\n", installPath)
+
+	if err := fileutils.Untar(downloadIdeaTarTo, installPath); err != nil {
+		fmt.Printf("failed to untar: %s\n%v", downloadIdeaTarTo, err)
+		return
+	}
+	sourceSymlink := filepath.Join(installPath, fileutils.GetFolder(downloadIdeaTarTo))
+	symlink := filepath.Join(installPath, symlinkName)
+	fmt.Printf("Creating symlink %s -> %s\n", sourceSymlink, symlink)
+	if err := fileutils.CreateUpdateSymlink(sourceSymlink, symlink); err != nil {
+		fmt.Printf("failed to create symlink: %s\n%v", downloadIdeaTarTo, err)
+	}
 }
