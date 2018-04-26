@@ -1,4 +1,3 @@
-// +build unix
 package idea
 
 import (

@@ -9,8 +9,6 @@ import (
 	"strings"
 )
 
-const UNTAR_PERMISSION = 0755
-
 func Untar(src string, destination string) error {
 	return archiver.TarGz.Open(src, destination)
 }
