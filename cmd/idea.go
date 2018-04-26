@@ -17,10 +17,10 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"fmt"
-	"github.com/tjololo/go-learning/pkg/fileutils"
+	"github.com/tjololo/dunix/pkg/fileutils"
 	"path/filepath"
 	"os"
-	"github.com/tjololo/go-learning/pkg/idea"
+	"github.com/tjololo/dunix/pkg/idea"
 )
 
 var installPath string

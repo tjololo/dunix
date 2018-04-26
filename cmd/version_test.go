@@ -6,7 +6,7 @@ import (
 
 func TestPrintVersion(t *testing.T) {
 	version := getVersion()
-	if version != "go-learning version: 0.0.1-alpha-beta" {
+	if version != "dunix version: 0.0.1-alpha-beta" {
 		t.Error("Wrong version returned")
 	}
 }

@@ -14,7 +14,7 @@
 
 package main
 
-import "github.com/tjololo/go-learning/cmd"
+import "github.com/tjololo/dunix/cmd"
 
 func main() {
 	cmd.Execute()
