@@ -1,0 +1,6 @@
+version: 2
+jobs:
+  build:
+    working_directory: /go/src/github.com/tjololo/dunix
+    docker:
+      - image: circleci/golang:1.8
