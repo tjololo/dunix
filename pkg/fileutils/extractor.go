@@ -9,11 +9,13 @@ import (
 	"strings"
 )
 
+//Untar an tar.gz archive to destination folder
 func Untar(src string, destination string) error {
 	return archiver.TarGz.Open(src, destination)
 }
 
-func GetFolder(src string) string {
+//GetRootFolder root folder in tar.gz folder
+func GetRootFolder(src string) string {
 	file, err := os.Open(src)
 	if err != nil {
 		fmt.Printf("Could not open")

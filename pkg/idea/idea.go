@@ -7,17 +7,20 @@ import (
 	"gopkg.in/cheggaaa/pb.v1"
 )
 
-const VERSION = "2018.1.2"
+const defaultVersion = "2018.1.2"
 
-const URI = "https://download.jetbrains.com/idea/ideaIU-"
+const uri = "https://download.jetbrains.com/idea/ideaIU-"
 
+//GetDownloadURI generate idea download URL based on version
 func GetDownloadURI(version string) string {
 	if version == "" {
-		return URI + VERSION + FILE_EXTENSION
+		return uri + defaultVersion + fileExtension
 	}
-	return URI + version + FILE_EXTENSION
+	return uri + version + fileExtension
 }
 
+
+//DownloadFile download file via http to filepath
 func DownloadFile(filepath string, url string) error {
 
 	// Create the file

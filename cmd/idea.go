@@ -44,12 +44,12 @@ func init() {
 }
 
 func installIdea(cmd *cobra.Command, args []string) {
-	downloadUrl := idea.GetDownloadURI(version)
+	downloadURL := idea.GetDownloadURI(version)
 	downloadIdeaTarTo := "/tmp/idea.tar.gz"
 	defer os.Remove(downloadIdeaTarTo)
 	fmt.Printf("Downloading idea version %s\n", version)
-	if err := idea.DownloadFile(downloadIdeaTarTo, downloadUrl); err != nil {
-		fmt.Printf("failed to download idea from URL: %s to folder %s\n%v", downloadUrl, installPath, err)
+	if err := idea.DownloadFile(downloadIdeaTarTo, downloadURL); err != nil {
+		fmt.Printf("failed to download idea from URL: %s to folder %s\n%v", downloadURL, installPath, err)
 		return
 	}
 	fmt.Printf("Extracting to: %s\n", installPath)
@@ -58,7 +58,7 @@ func installIdea(cmd *cobra.Command, args []string) {
 		fmt.Printf("failed to untar: %s\n%v", downloadIdeaTarTo, err)
 		return
 	}
-	sourceSymlink := filepath.Join(installPath, fileutils.GetFolder(downloadIdeaTarTo))
+	sourceSymlink := filepath.Join(installPath, fileutils.GetRootFolder(downloadIdeaTarTo))
 	symlink := filepath.Join(installPath, symlinkName)
 	fmt.Printf("Creating symlink %s -> %s\n", sourceSymlink, symlink)
 	if err := fileutils.CreateUpdateSymlink(sourceSymlink, symlink); err != nil {

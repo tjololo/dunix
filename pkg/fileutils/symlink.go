@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 )
 
+//CreateUpdateSymlink creates symlink to file or folder. If symlink exists it will be deleted and recreated
 func CreateUpdateSymlink(origFile string, symlink string) error {
 	absolutePath, err := filepath.Abs(origFile)
 	if err != nil {
