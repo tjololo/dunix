@@ -1,10 +1,10 @@
 package idea
 
 import (
-	"os"
-	"net/http"
-	"io"
 	"gopkg.in/cheggaaa/pb.v1"
+	"io"
+	"net/http"
+	"os"
 )
 
 const defaultVersion = "2018.1.2"
@@ -18,7 +18,6 @@ func GetDownloadURI(version string) string {
 	}
 	return uri + version + fileExtension
 }
-
 
 //DownloadFile download file via http to filepath
 func DownloadFile(filepath string, url string) error {

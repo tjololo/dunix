@@ -1,3 +1,3 @@
 package idea
 
-const fileExtension=".tar.gz"
+const fileExtension = ".tar.gz"

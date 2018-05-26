@@ -1,11 +1,11 @@
 package idea
 
 import (
-	"testing"
-	"os"
-	"net/http/httptest"
-	"net/http"
 	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"testing"
 )
 
 func TestGetDownloadURI_version_defined(t *testing.T) {

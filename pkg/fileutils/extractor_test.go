@@ -1,9 +1,9 @@
 package fileutils
 
 import (
-	"testing"
-	"os"
 	"io/ioutil"
+	"os"
+	"testing"
 )
 
 func TestUntarFile(t *testing.T) {

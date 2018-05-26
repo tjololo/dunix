@@ -1,11 +1,11 @@
 package fileutils
 
 import (
-	"compress/gzip"
 	"archive/tar"
-	"os"
+	"compress/gzip"
 	"fmt"
 	"github.com/mholt/archiver"
+	"os"
 	"strings"
 )
 
@@ -26,7 +26,7 @@ func GetRootFolder(src string) string {
 		fmt.Printf("Could not read gzip")
 	}
 	tr := tar.NewReader(gzr)
-	header, err:= tr.Next()
+	header, err := tr.Next()
 	if err != nil {
 		fmt.Printf("Could not get header")
 	}

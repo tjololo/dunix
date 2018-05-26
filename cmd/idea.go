@@ -15,18 +15,19 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 	"github.com/tjololo/dunix/pkg/fileutils"
-	"path/filepath"
-	"os"
 	"github.com/tjololo/dunix/pkg/idea"
+	"os"
+	"path/filepath"
 )
 
 var installPath string
 var createSymlink bool
 var symlinkName string
 var version string
+
 // ideaCmd represents the idea command
 var ideaCmd = &cobra.Command{
 	Use:   "idea",

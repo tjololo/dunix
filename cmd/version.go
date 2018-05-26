@@ -24,7 +24,7 @@ import (
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print version",
-	Run: printVersion,
+	Run:   printVersion,
 }
 
 func init() {

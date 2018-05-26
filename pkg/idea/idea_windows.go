@@ -1,3 +1,3 @@
 package idea
 
-const FILE_EXTENSION=".zip"
+const FILE_EXTENSION = ".zip"
