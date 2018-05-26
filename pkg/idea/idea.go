@@ -4,6 +4,7 @@ import (
 	"os"
 	"net/http"
 	"io"
+	"gopkg.in/cheggaaa/pb.v1"
 )
 
 const VERSION = "2018.1.2"
@@ -32,13 +33,14 @@ func DownloadFile(filepath string, url string) error {
 		return err
 	}
 	defer resp.Body.Close()
-
+	bar := pb.New(int(resp.ContentLength)).SetUnits(pb.U_BYTES)
+	bar.Start()
+	r := bar.NewProxyReader(resp.Body)
 	// Write the body to file
-	_, err = io.Copy(out, resp.Body)
+	_, err = io.Copy(out, r)
 	if err != nil {
 		return err
 	}
 
 	return nil
 }
-

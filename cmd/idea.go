@@ -40,13 +40,14 @@ func init() {
 	ideaCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Intellij Idea in.")
 	ideaCmd.Flags().BoolVarP(&createSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
 	ideaCmd.Flags().StringVar(&symlinkName, "symlink-name", "idea", "Name of the symlink created with -s.")
-	ideaCmd.Flags().StringVarP(&version, "version", "v", "2018.1.2", "What version of Intellij Idea to install.")
+	ideaCmd.Flags().StringVarP(&version, "version", "v", "2018.1.4", "What version of Intellij Idea to install.")
 }
 
 func installIdea(cmd *cobra.Command, args []string) {
 	downloadUrl := idea.GetDownloadURI(version)
 	downloadIdeaTarTo := "/tmp/idea.tar.gz"
 	defer os.Remove(downloadIdeaTarTo)
+	fmt.Printf("Downloading idea version %s\n", version)
 	if err := idea.DownloadFile(downloadIdeaTarTo, downloadUrl); err != nil {
 		fmt.Printf("failed to download idea from URL: %s to folder %s\n%v", downloadUrl, installPath, err)
 		return

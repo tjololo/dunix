@@ -50,6 +50,12 @@
   version = "v1.7.6"
 
 [[projects]]
+  name = "github.com/mattn/go-runewidth"
+  packages = ["."]
+  revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
+  version = "v0.0.2"
+
+[[projects]]
   name = "github.com/mholt/archiver"
   packages = ["."]
   revision = "cdc68dd1f170b8dfc1a0d2231b5bb0967ed67006"
@@ -149,6 +155,12 @@
   version = "v0.3.0"
 
 [[projects]]
+  name = "gopkg.in/cheggaaa/pb.v1"
+  packages = ["."]
+  revision = "2af8bbdea9e99e83b3ac400d8f6b6d1b8cbbf338"
+  version = "v1.0.25"
+
+[[projects]]
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   revision = "86f5ed62f8a0ee96bd888d2efdfd6d4fb100a4eb"
@@ -157,6 +169,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "427103ea1b1caef04439ca5cc767f74ac9e14355bdeaf64ee7b18b31d9ee7ac3"
+  inputs-digest = "71108b27d4b57dc3d8fb36805ac1a3f4b394bb11c5ab1f8c4a9ab626817db069"
   solver-name = "gps-cdcl"
   solver-version = 1
