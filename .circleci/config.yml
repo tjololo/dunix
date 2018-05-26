@@ -8,6 +8,22 @@ jobs:
       - checkout
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: go get -u golang.org/x/lint/golint
+      - run: mkdir -p $TEST_RESULTS
+      - run: go get github.com/jstemmer/go-junit-report
       - run: dep ensure -v
-      - run: go test -v -race $(go list ./... | grep -v /vendor/)
-      - run: golint $(go list ./... | grep -v /vendor/)
+      - run:
+          name: Run unit tests
+          command: |
+            trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
+            make test | tee ${TEST_RESULTS}/go-test.out
+      - run: make
+      - save_cache:
+          key: v1-pkg-cache
+          paths:
+            - "/go/pkg"
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results:
+          path: /tmp/test-results
