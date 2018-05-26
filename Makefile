@@ -18,4 +18,4 @@ workdir/contacts: $(GOFILES)
 test: test-all
 
 test-all:
-	@go test -v $(GOPACKAGES)
+	@go test -v -cover $(GOPACKAGES)
