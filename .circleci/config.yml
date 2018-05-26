@@ -4,3 +4,7 @@ jobs:
     working_directory: /go/src/github.com/tjololo/dunix
     docker:
       - image: circleci/golang:1.8
+    steps:
+      - checkout
+      - run: dep ensure
+      - run: go test -v -race ./...
