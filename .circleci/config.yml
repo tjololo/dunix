@@ -9,3 +9,4 @@ jobs:
       - run: curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
       - run: dep ensure -v
       - run: go test -v -race $(go list ./... | grep -v /vendor/)
+      - run: golint $(go list ./... | grep -v /vendor/)
