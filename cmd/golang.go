@@ -33,10 +33,10 @@ var golangCmd = &cobra.Command{
 
 func init() {
 	installCmd.AddCommand(golangCmd)
-	installCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Golang in.")
-	installCmd.Flags().BoolVarP(&createSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
-	installCmd.Flags().StringVar(&symlinkName, "symlink-name", "golang", "Name of the symlink created with -s.")
-	installCmd.Flags().StringVarP(&version, "version", "v", golang.DefaultVersion, "What version of Golang to install.")
+	golangCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Golang in.")
+	golangCmd.Flags().BoolVarP(&createSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
+	golangCmd.Flags().StringVar(&symlinkName, "symlink-name", "golang", "Name of the symlink created with -s.")
+	golangCmd.Flags().StringVarP(&version, "version", "v", golang.DefaultVersion, "What version of Golang to install.")
 }
 
 func installGolang(cmd *cobra.Command, args []string) {
