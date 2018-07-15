@@ -49,7 +49,7 @@ func installIdea(cmd *cobra.Command, args []string) {
 	downloadIdeaTarTo := "/tmp/idea.tar.gz"
 	defer os.Remove(downloadIdeaTarTo)
 	fmt.Printf("Downloading idea version %s\n", version)
-	if err := idea.DownloadFile(downloadIdeaTarTo, downloadURL); err != nil {
+	if err := fileutils.DownloadFile(downloadIdeaTarTo, downloadURL); err != nil {
 		fmt.Printf("failed to download idea from URL: %s to folder %s\n%v", downloadURL, installPath, err)
 		return
 	}
