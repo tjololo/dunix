@@ -39,15 +39,12 @@ func TestCreateUpdateSymlinkReplacesExistingSymlink(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not open file %s", origFile)
 	}
-	err = nil
 	if err = CreateUpdateSymlink(origFile, symlink); err != nil {
 		t.Errorf("CreateUpdateSymlink returned error: %v", err)
 	}
-	err = nil
 	if err = CreateUpdateSymlink(anotherFile, symlink); err != nil {
 		t.Errorf("CreateUpdateSymlink returned error: %v", err)
 	}
-	err = nil
 	if _, err = os.Stat(symlink); os.IsNotExist(err) {
 		t.Errorf("Symlink %s not created", symlink)
 	}
