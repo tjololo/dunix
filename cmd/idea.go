@@ -41,7 +41,7 @@ func init() {
 	ideaCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Intellij Idea in.")
 	ideaCmd.Flags().BoolVarP(&createSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
 	ideaCmd.Flags().StringVar(&symlinkName, "symlink-name", "idea", "Name of the symlink created with -s.")
-	ideaCmd.Flags().StringVarP(&version, "version", "v", "2018.1.6", "What version of Intellij Idea to install.")
+	ideaCmd.Flags().StringVarP(&version, "version", "v", idea.DefaultVersion, "What version of Intellij Idea to install.")
 }
 
 func installIdea(cmd *cobra.Command, args []string) {
