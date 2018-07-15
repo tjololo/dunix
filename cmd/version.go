@@ -46,5 +46,5 @@ func printVersion(cmd *cobra.Command, args []string) {
 }
 
 func getVersion() string {
-	return "dunix version: 0.0.1-alpha-beta"
+	return "dunix version: 0.2.0"
 }
