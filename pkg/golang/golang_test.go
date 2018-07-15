@@ -17,4 +17,3 @@ func TestGetDownloadURI_version_not_defined(t *testing.T) {
 		t.Error("Wrong download url returned\nExpected:", expected, "\nActual: ", actual)
 	}
 }
-

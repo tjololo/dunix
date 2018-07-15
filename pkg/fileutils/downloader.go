@@ -1,10 +1,10 @@
 package fileutils
 
 import (
-	"os"
-	"net/http"
 	"gopkg.in/cheggaaa/pb.v1"
 	"io"
+	"net/http"
+	"os"
 )
 
 //DownloadFile download file via http to filepath

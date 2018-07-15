@@ -1,6 +1,6 @@
 package idea
 
-//Default version of Idea to install
+//DefaultVersion deafult version of Idea to install
 const DefaultVersion = "2018.1.2"
 
 const uri = "https://download.jetbrains.com/idea/ideaIU-"

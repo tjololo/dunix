@@ -1,11 +1,11 @@
 package fileutils
 
 import (
-	"testing"
-	"net/http/httptest"
-	"net/http"
-	"os"
 	"io/ioutil"
+	"net/http"
+	"net/http/httptest"
+	"os"
+	"testing"
 )
 
 func TestDownloadFile(t *testing.T) {

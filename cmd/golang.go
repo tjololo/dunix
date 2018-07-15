@@ -15,11 +15,11 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
+	"github.com/tjololo/dunix/pkg/fileutils"
 	"github.com/tjololo/dunix/pkg/golang"
 	"os"
-	"github.com/tjololo/dunix/pkg/fileutils"
 	"path/filepath"
 )
 
@@ -32,8 +32,8 @@ var goVersion string
 var golangCmd = &cobra.Command{
 	Use:   "golang",
 	Short: "Install Golang",
-	Long: `Download and install golang`,
-	Run: installGolang,
+	Long:  `Download and install golang`,
+	Run:   installGolang,
 }
 
 func init() {
