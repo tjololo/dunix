@@ -23,6 +23,11 @@ import (
 	"path/filepath"
 )
 
+var goInstallPath string
+var goCreateSymlink bool
+var goSymlinkName string
+var goVersion string
+
 // golangCmd represents the golang command
 var golangCmd = &cobra.Command{
 	Use:   "golang",
@@ -33,29 +38,29 @@ var golangCmd = &cobra.Command{
 
 func init() {
 	installCmd.AddCommand(golangCmd)
-	golangCmd.Flags().StringVarP(&installPath, "install-path", "p", "/opt", "What dir to install Golang in.")
-	golangCmd.Flags().BoolVarP(&createSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
-	golangCmd.Flags().StringVar(&symlinkName, "symlink-name", "golang", "Name of the symlink created with -s.")
-	golangCmd.Flags().StringVarP(&version, "version", "v", golang.DefaultVersion, "What version of Golang to install.")
+	golangCmd.Flags().StringVarP(&goInstallPath, "install-path", "p", "/opt", "What dir to install Golang in.")
+	golangCmd.Flags().BoolVarP(&goCreateSymlink, "create-symlink", "s", true, "Create symlink in install folder.")
+	golangCmd.Flags().StringVar(&goSymlinkName, "symlink-name", "golang", "Name of the symlink created with -s.")
+	golangCmd.Flags().StringVarP(&goVersion, "version", "v", golang.DefaultVersion, "What version of Golang to install.")
 }
 
 func installGolang(cmd *cobra.Command, args []string) {
-	downloadURL := golang.GetDownloadURI(version)
+	downloadURL := golang.GetDownloadURI(goVersion)
 	downloadTarTo := "/tmp/golang.tar.gz"
 	defer os.Remove(downloadTarTo)
-	fmt.Printf("Downloading golang version %s\n", version)
+	fmt.Printf("Downloading golang version %s\n", goVersion)
 	if err := fileutils.DownloadFile(downloadTarTo, downloadURL); err != nil {
-		fmt.Printf("failed to download golang from URL: %s to folder %s\n%v", downloadURL, installPath, err)
+		fmt.Printf("failed to download golang from URL: %s to folder %s\n%v", downloadURL, goInstallPath, err)
 		return
 	}
-	fmt.Printf("Extracting to: %s\n", installPath)
+	fmt.Printf("Extracting to: %s\n", goInstallPath)
 
-	if err := fileutils.Untar(downloadTarTo, installPath); err != nil {
+	if err := fileutils.Untar(downloadTarTo, goInstallPath); err != nil {
 		fmt.Printf("failed to untar: %s\n%v", downloadTarTo, err)
 		return
 	}
-	sourceSymlink := filepath.Join(installPath, fileutils.GetRootFolder(downloadTarTo))
-	symlink := filepath.Join(installPath, symlinkName)
+	sourceSymlink := filepath.Join(goInstallPath, fileutils.GetRootFolder(downloadTarTo))
+	symlink := filepath.Join(goInstallPath, goSymlinkName)
 	fmt.Printf("Creating symlink %s -> %s\n", sourceSymlink, symlink)
 	if err := fileutils.CreateUpdateSymlink(sourceSymlink, symlink); err != nil {
 		fmt.Printf("failed to create symlink: %s\n%v", downloadTarTo, err)
